@@ -1,0 +1,29 @@
+{
+    "name": "wegewerk/ai3_faq",
+    "type": "typo3-cms-extension",
+    "description": "Ai3 FAQ - Create FAQ from Page content",
+    "homepage": "https://www.wegewerk.com/",
+    "license": [
+        "GPL-2.0-or-later"
+    ],
+    "keywords": [
+        "TYPO3 CMS"
+    ],
+    "require": {
+        "typo3/cms-core": "^13.4.0 | ^14.0",
+        "typo3/cms-fluid-styled-content": "^13.4.0 | ^14.0",
+        "wegewerk/ai3_core": "@dev",
+        "bk2k/bootstrap-package": "*",
+        "brotkrueml/schema": "^4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wegewerk\\Ai3Faq\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "ai3_faq"
+        }
+    }
+}

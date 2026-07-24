@@ -1,0 +1,8 @@
+..  This file contains global includes for all documentation files.
+
+.. |extension_key| replace:: ai3_faq
+.. |extension_name| replace:: Ai3 FAQ
+.. |vendor| replace:: wegewerk GmbH
+
+..  _wegewerk-website: https://www.wegewerk.com/
+..  _github-repo: https://github.com/wegewerk/ai3-monorepo/tree/main/packages/ai3_faq

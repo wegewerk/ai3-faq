@@ -1,0 +1,22 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Wegewerk\Ai3Faq\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
+
+  Wegewerk\Ai3Faq\Domain\Capabilities\ArticlefaqCapability:
+    autowire: false
+    arguments:
+      $key: 'articlefaq'
+      $title: 'Article FAQ'
+      $endpoint: '@Wegewerk\Ai3Faq\Api\ZakAiFaq'
+    tags:
+      - name: ai3.capability
+
+  Wegewerk\Ai3Faq\Api\ZakAiFaq:
+    arguments:
+      $client: '@Wegewerk\Ai3Core\Api\ZakAiClient'
