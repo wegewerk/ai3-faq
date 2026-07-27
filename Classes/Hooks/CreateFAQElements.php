@@ -2,13 +2,13 @@
 
 namespace Wegewerk\Ai3Faq\Hooks;
 
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\StringUtility;
 
-#[Autowire(public:true)]
+#[Autoconfigure(public:true)]
 class CreateFAQElements
 {
     public function __construct(
