@@ -13,12 +13,10 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1780057002] = [
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] = CreateFAQElements::class;
 ExtensionManagementUtility::addTypoScriptSetup('
-lib.contentElement {
-    templateRootPaths.1784806551593 = EXT:ai3_faq/Resources/Private/Templates/ContentElements/
-}
 
 tt_content.ai3_faq =< tt_content.accordion
 tt_content.ai3_faq {
+    templateRootPaths.1784806551593 = EXT:ai3_faq/Resources/Private/Templates/ContentElements/
     templateName = Ai3Faq
 }
 

@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/)
 ## [Unreleased]
 
 
+## [0.9.17] - 2026-07-27
+### fix
+- move templateRootPaths to tt_content.ai3_faq
+
+
 ## [0.9.16] - 2026-07-27
 
 
