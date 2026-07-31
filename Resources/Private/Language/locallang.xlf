@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file source-language="en" original="EXT:ai3/Resources/Private/Language/locallang_db.xlf" datatype="plaintext" product-name="ai3" date="2026-07-24T15:03:11+02:00">
+	<file source-language="en" original="EXT:ai3/Resources/Private/Language/locallang_db.xlf" datatype="plaintext" product-name="ai3" date="2026-07-29T10:29:37+02:00">
 		<header></header>
 		<body>
 			<trans-unit id="tx_ai3.faq.error">
@@ -16,7 +16,7 @@
 				<source>FAQ generator</source>
 			</trans-unit>
 			<trans-unit id="tx_ai3.faq.label_ctype">
-				<source>Page FAQ</source>
+				<source>Ai3 FAQ</source>
 			</trans-unit>
 			<trans-unit id="tx_ai3.faq.label_description">
 				<source>Generates FAQ elements of the page content</source>

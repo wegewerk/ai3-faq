@@ -12,7 +12,7 @@ class FaqApp {
         this.api = new Ai3Api();
         this.loading = false;
         this.saving = false;
-        this.language = this.getSelectedLanguage();
+        this.language = this.getLanguageOptions()[0].value;
         this.previewData = [];
         this.ai3Type = '';
         this.ai3Source = '';
@@ -138,19 +138,23 @@ class FaqApp {
     }
 
     getLanguageOptions() {
-         return [
-             {
-                 value: 'de',
-                 label: 'Deutsch'
-             }
-         ]
+        return [
+            {
+                value: 'en',
+                label: 'English'
+            },
+            {
+                value: 'de',
+                label: 'Deutsch'
+            }
+        ]
     }
 
     getSelectedLanguage() {
         const selector = `[name="data[tt_content][${this.recordUid}][sys_language_uid]"]`;
         const field = document.querySelector(selector);
         if (!field) {
-            return 0;
+            return this.getLanguageOptions()[0].value;
         } else  {
             return field.value;
         }

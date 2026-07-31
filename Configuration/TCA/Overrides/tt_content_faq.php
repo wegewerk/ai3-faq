@@ -18,14 +18,14 @@ ExtensionManagementUtility::addTcaSelectItem('tt_content',
         'group'       => 'AI3',
     ],
     'textmedia',
-    'after',);
+    'after');
 
 
 $GLOBALS['TCA']['tt_content']['columns']['tx_ai3_faq_generator'] = [
     'exclude' => true,
     'label'   => 'LLL:EXT:ai3_faq/Resources/Private/Language/locallang.xlf:tx_ai3.faq.generator',
     'config'  => [
-        'type'       => 'user',
+        'type'       => 'none',
         'renderType' => 'ai3FaqGeneratorElement',
     ],
 ];
