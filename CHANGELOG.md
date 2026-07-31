@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/)
 ### fix
 - initially select language 'en'
 - change TCA field type to 'none' for custom Fields
-
+- display credits widget next to the generate button
 
 
 ## [0.9.20] - 2026-07-29
