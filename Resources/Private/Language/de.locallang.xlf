@@ -38,6 +38,10 @@
 				<source>Use FAQ Elements</source>
 				<target>Generierte FAQ verwenden</target>
 			</trans-unit>
+			<trans-unit id="tx_ai3.faq.cost">
+				<source>%s credit(s)</source>
+				<target>%s Credit(s)</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

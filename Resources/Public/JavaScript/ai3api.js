@@ -1,6 +1,7 @@
 import AjaxRequest from "@typo3/core/ajax/ajax-request.js";
+import Ai3ApiBase from "@wegewerk/ai3core/ai3api.js";
 
-class Ai3Api {
+class Ai3Api extends Ai3ApiBase {
   generateFaq(pageId, recordUid, language) {
       return new AjaxRequest(TYPO3.settings.ajaxUrls['ai3_faq_generate'])
           .post({

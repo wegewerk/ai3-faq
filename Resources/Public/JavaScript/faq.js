@@ -3,6 +3,7 @@ import {html, render} from 'lit-html';
 import Ai3Api from './ai3api.js';
 import Notification from "@typo3/backend/notification.js";
 import FormEngine from "@typo3/backend/form-engine.js";
+import "@wegewerk/ai3core/creditsElement.js";
 
 class FaqApp {
     constructor(container) {
@@ -12,6 +13,7 @@ class FaqApp {
         this.api = new Ai3Api();
         this.loading = false;
         this.saving = false;
+        this.creditCost = null;
         this.language = this.getLanguageOptions()[0].value;
         this.previewData = [];
         this.ai3Type = '';
@@ -20,6 +22,17 @@ class FaqApp {
     }
 
     init() {
+        this.render();
+        this.fetchCreditCost();
+    }
+
+    async fetchCreditCost() {
+        try {
+            const costs = await this.api.creditCosts();
+            this.creditCost = costs?.faq ?? null;
+        } catch {
+            this.creditCost = null;
+        }
         this.render();
     }
 
@@ -97,7 +110,8 @@ class FaqApp {
                 >
                     <typo3-backend-icon identifier="ai3-summary-icon" size="small"></typo3-backend-icon>
                     ${this.loading ? lll('tx_ai3.faq.generating') : lll('tx_ai3.faq.button_generate')}
-                </button>
+                    ${this.creditCost !== null ? ` (${lll('tx_ai3.faq.cost', this.creditCost)})` : ''}
+                </button><ai3-credits></ai3-credits>
                 ${this.loading ? html`<typo3-backend-spinner size="small"></typo3-backend-spinner>` : ''}
                 <select class="form-select" @change="${(e) => this.language = e.target.value}">
                     ${languageOptions.map(option => html`
@@ -140,12 +154,12 @@ class FaqApp {
     getLanguageOptions() {
         return [
             {
-                value: 'en',
-                label: 'English'
-            },
-            {
                 value: 'de',
                 label: 'Deutsch'
+            },
+            {
+                value: 'en',
+                label: 'English'
             }
         ]
     }
