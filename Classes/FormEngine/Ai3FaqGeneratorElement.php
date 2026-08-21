@@ -13,6 +13,11 @@ class Ai3FaqGeneratorElement extends AbstractFormElement
     {
         $result = $this->initializeResultArray();
         $result['javaScriptModules'][] = JavaScriptModuleInstruction::create('@wegewerk/Ai3Faq/faq.js');
+        $result['additionalInlineLanguageLabelFiles'][] = 'EXT:ai3_faq/Resources/Private/Language/locallang.xlf';
+
+        // script und language labels aus ai3_core für das credits-element
+        $result['javaScriptModules'][] = JavaScriptModuleInstruction::create('@wegewerk/ai3core/creditsElement.js');
+        $result['additionalInlineLanguageLabelFiles'][] = 'EXT:ai3_core/Resources/Private/Language/locallang.xlf';
 
         $html = [
             '<div data-ai3="ai3-faq-container"',
