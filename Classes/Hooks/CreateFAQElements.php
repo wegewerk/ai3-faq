@@ -21,9 +21,15 @@ class CreateFAQElements
                 $recordUid = $dataHandler->substNEWwithIDs[$key] ?? $key;
                 $recordPid = $this->getPid('tt_content', $recordUid);
                 if($record['tx_ai3_type'] ?? null === 'faq' && $record['tx_ai3_raw'] ?? null !== '') {
-                    $faqdata = json_decode($record['tx_ai3_raw'], true);
+                    $rawDataFromFrontend = json_decode($record['tx_ai3_raw'], true);
+                    $replace = $rawDataFromFrontend['replace'] ?? false;
+                    if($replace) {
+                        $this->connectionPool->getConnectionForTable('tt_content')->delete('tx_bootstrappackage_accordion_item', ['tt_content' => $recordUid]);
+                    }
+                    $faqdata = $rawDataFromFrontend['faqitems'] ?? [];
                     if (is_array($faqdata)) {
                         $datamap = [];
+                        $faqdata = array_reverse($faqdata);
                         foreach ($faqdata as $item) {
                             if (isset($item['question'], $item['answer'])) {
                                 $fieldArray = [

@@ -20,7 +20,7 @@ class ArticlefaqController extends AbstractAjaxController
     public function __construct(
         LoggerInterface                  $logger,
         private readonly PagesRepository $pagesRepository,
-        private ArticlefaqCapability $articlefaqCapability,
+        private ArticlefaqCapability     $articlefaqCapability,
         protected StorageRepository      $storageRepository
     ) {
         parent::__construct($logger);
@@ -41,22 +41,28 @@ class ArticlefaqController extends AbstractAjaxController
                 return $this->createJsonErrorResponse(new Response(), [ 'error' => 'No content found on page' ]);
             }
 
-            $faq = $this->articlefaqCapability->endpoint->generate(
-                '',
-                $content,
-                $parsedBody['language'] ?? 'de');
+            $faq = $this->articlefaqCapability->endpoint->generate([
+                'text'     => $content,
+                'language' => $parsedBody['language'] ?? 'de',
+                'min'      => $parsedBody['min'] ?? null,
+                'max'      => $parsedBody['max'] ?? null,
+                'keyword'  => $parsedBody['keyword'] ?? null,
+                'previous' => $parsedBody['previous'] ?? null,
+            ]);
             if ($faq === null) {
-                return $this->createJsonErrorResponse(new Response(), [ 'error' => 'Error: Suggestion was empty for Page ' . $pageId ]);
+                return $this->createJsonErrorResponse(new Response(),
+                    [ 'error' => 'Error: Suggestion was empty for Page ' . $pageId ]);
             }
             if (is_string($faq)) {
                 $faq = json_decode($faq, true, 512, JSON_THROW_ON_ERROR);
             }
 
-            return $this->createJsonSuccessResponse(new Response(), [
-                'faqData' => $faq,
-                'source' => $content,
-                'type' => 'faq'
-            ]);
+            return $this->createJsonSuccessResponse(new Response(),
+                [
+                    'faqData' => $faq,
+                    'source'  => $content,
+                    'type'    => 'faq'
+                ]);
         } catch (\Exception $e) {
             $this->logger->error('Error generating Faq: ' . $e->getMessage());
             return $this->createJsonErrorResponse(new Response(), [ 'error' => $e->getMessage() ]);

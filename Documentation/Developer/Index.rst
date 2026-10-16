@@ -47,20 +47,25 @@ ZakAiFaq
 
 .. php:class:: Wegewerk\Ai3Faq\Api\ZakAiFaq
 
-   Implements ``Wegewerk\Ai3Core\Api\ZakAiEndpointInterface``. Wraps
-   ``ZakAiClient`` to call the ZAK-AI ``faq`` REST endpoint.
+   Extends ``Wegewerk\Ai3Core\Api\AbstractZakAiEndpoint`` (implementing
+   ``ZakAiEndpointInterface``). Wraps ``ZakAiClient`` to call the
+   ZAK-AI ``faq`` REST endpoint.
 
-   .. php:method:: generate($imagePath, $description, $language)
+   .. php:method:: generate(array $options = [])
 
       Sends page content to the ZAK-AI API and returns the generated
       FAQ data as a JSON string containing question-answer pairs.
 
-      :param string $imagePath: Unused; reserved for future use.
-      :param string $description: The page content text to analyze for FAQ generation.
-      :param string $language: The target language for the FAQ (default: 'de').
+      :param array $options: Associative array of options:
+         * ``text`` (string, required): The page content text to analyze for FAQ generation.
+         * ``language`` (string, optional): Target language for the FAQ (e.g. 'de').
+         * ``min`` (int|null, optional): Minimum number of questions to generate.
+         * ``max`` (int|null, optional): Maximum number of questions to generate.
+         * ``keyword`` (string|null, optional): Focus keyword.
+         * ``previous`` (mixed, optional): Previous context or suggestions.
       :returntype: string
 
-      The response contains an array of objects with ``question`` and ``answer`` properties.
+      The response contains a JSON string with an array of objects with ``question`` and ``answer`` properties.
 
 .. _developer-ajax-controller:
 
@@ -353,9 +358,9 @@ To customize FAQ processing, extend the ``ZakAiFaq`` class:
 
    class CustomZakAiFaq extends ZakAiFaq
    {
-       public function generate(string $imagePath, string $description, string $language): string
+       public function generate(array $options = []): string
        {
-           $result = parent::generate($imagePath, $description, $language);
+           $result = parent::generate($options);
            
            // Custom processing of FAQ data
            $faqData = json_decode($result, true);

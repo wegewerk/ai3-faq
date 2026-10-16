@@ -2,28 +2,15 @@
 
 namespace Wegewerk\Ai3Faq\Api;
 
-use Wegewerk\Ai3Core\Api\ZakAiClient;
-use Wegewerk\Ai3Core\Api\ZakAiEndpointInterface;
+use Wegewerk\Ai3Core\Api\AbstractZakAiEndpoint;
 
 /**
- * Implemets the API Endpoint related to page summary generation
+ * Implements the API Endpoint related to FAQ generation
  */
-class ZakAiFaq implements ZakAiEndpointInterface
+class ZakAiFaq extends AbstractZakAiEndpoint
 {
-    public function __construct(private ZakAiClient $client) {}
-
-    public function generate(string $imagePath, string $description, string $language): string
-    {
-        $body = $this->client->postJson(
-            'faq',
-            [
-                'text'     => $description,
-                'language' => $language ?? 'de',
-            ]
-        );
-
-        $faq = $body['faq'] ?? $body['bulletpoints'] ?? [];
-        return $faq;
-    }
-
+    protected string $endpoint = 'faq';
+    protected string $responseKey = 'faq';
+    protected array $requiredOptions = [ 'text' ];
+    protected array $optionalOptions = [ 'min', 'max', 'previous', 'keyword', 'language' ];
 }
